@@ -9,7 +9,7 @@ const Error = () => {
     <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '50px' }}>
       <img src={Ero} alt="Cute 404 Image" style={{ width: '300px' }} />
       <h1 className=' text-8xl font-extrabold'>Oops!</h1>
-      <p>Looks like this page doesn't exist. The unicorn ate it!</p>
+      <p>Looks like this page doesn't exist. The monkey ate it!</p>
       <p>But don't worry, you can click the button below to go back to the home page:</p>
       <Link to="/" style={{ textDecoration: 'none' }}>
         <button style={{ padding: '10px 20px', fontSize: '16px', borderRadius: '5px', backgroundColor: '#007bff', color: '#fff', border: 'none' }} onClick={()=> toast.success("Reached Home")} >Take me home!</button>
