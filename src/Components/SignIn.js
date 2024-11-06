@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import logo from '../Utilities/logo.png';
 import './style.css';
-import {  toast } from 'react-toastify';
-
+import { toast } from 'react-toastify';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -46,44 +45,45 @@ const SignIn = () => {
   };
 
   return (
-    <div>
-      <Link to="/">
-        <img src={logo} className="w-15 h-12 ml-4 cursor-pointer" alt="Makemytrip" />
+    <div className="relative min-h-screen flex items-center justify-center bg-white px-4">
+      <Link to="/" className="absolute top-4 left-4">
+        <img src={logo} className="w-15 h-12 cursor-pointer" alt="Makemytrip" />
       </Link>
-      <p className="text-3xl font-light pl-20 ml-96 mt-16 gap-10 text-[#515151]">Sign In</p>
-      <form onSubmit={handleSubmit} className="pl-20 ml-96 mt-14">
-        <div>
-          <label htmlFor="email" className="text-[16px] text-[#757575] font-light mb-1">Email address</label><br />
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your Email address"
-            required
-            className="box-border w-[482px] h-[45px] font-light mb-2 pl-4"
-          />
-        </div>
-        <div>
-          <label htmlFor="password" className="text-[16px] font-light text-[#757575] mb-1">Password</label><br />
-          <input
-            type="password"
-            id="password"
-            value={password}
-            placeholder="Enter your password"
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="box-border w-[482px] h-[45px] font-light mb-14 pl-4"
-          />
-        </div>
-        <button type="submit" className="bg-[#378BE9] text-[29px] text-[#C4DDF8] font-light box-border w-[480px] h-[67px] rounded">Sign In</button>
-        <div className="flex self-center mt-1 text-xs">
-          <div className="flex text-neutral-600 text-[16px] text-[#797979] ml-20">
-            Don't have an account?
+
+      <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
+        <p className="text-3xl font-light text-center text-[#515151] mb-8">Sign In</p>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-[16px] text-[#757575] font-light mb-1">Email address</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your Email address"
+              required
+              className="w-full h-[45px] px-4 font-light border border-blue-400 focus:border-blue-500 rounded"
+            />
           </div>
-          <Link to='/register' className="text-blue-400 ml-5 text-[16px] font-light">Register Here</Link>
-        </div>
-      </form>
+          <div className="mb-6">
+            <label htmlFor="password" className="block text-[16px] font-light text-[#757575] mb-1">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full h-[45px] px-4 font-light border  border-blue-400 focus:border-blue-500 rounded"
+            />
+          </div>
+          <button type="submit" className="w-full h-[67px] bg-[#378BE9] text-[29px] text-[#C4DDF8] font-light rounded mb-4">Sign In</button>
+          <div className="flex justify-center items-center mt-2 text-xs text-[#797979]">
+            <span className="text-[16px]">Don't have an account?</span>
+            <Link to='/register' className="text-blue-400 ml-2 text-[16px] font-light">Register Here</Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

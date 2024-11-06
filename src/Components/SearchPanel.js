@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavbarSignIn from "./NavbarSignIn";
 import HotelCard from "./HotelCard";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const SearchPanel = () => {
   const [cities, setCities] = useState([]);
@@ -59,7 +59,6 @@ const SearchPanel = () => {
       });
       const data = await response.json();
       setHotels(data.data.hotels);
-      console.log("Fetched hotels:", data.data.hotels);  
     } catch (error) {
       console.error("Error fetching hotels:", error);
     }
@@ -130,82 +129,87 @@ const SearchPanel = () => {
         <NavbarSignIn onLogout={handleLogout} />
       </div>
       <div className="mt-[84px]">
-      <div className="w-full h-[150px] bg-[url('../Utilities/Background.png')] flex flex-col justify-center items-center">
-        <div className="flex items-center">
-          <select
-            value={selectedCity}
-            onChange={handleCityChange}
-            className="block w-[212px] p-2 h-[51px] border border-gray-300 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md bg-[#213345] border-none text-[#0675DC] text-[12px] "
-          >
-            <option value="">CITY,AREA OR PROPERTY</option>
-            {cities.map((city) => (
-              <option key={city._id} value={city.cityState.split(',')[0].trim()}>
-                {city.cityState.split(',')[0].trim()}
-              </option>
-            ))}
-          </select>
-          <button
-            onClick={handleSearch}
-            className="bg-gradient-to-r from-cyan-500 to-blue-500 w-[185px] h-[43px] ml-2 rounded-full"
-          >
-            Search
-          </button>
-        </div>
-        {!searchedCity && (
-          <h2 className="text-[30px] text-white font-light mt-4">
-            Search Properties in your preferred location
-          </h2>
-        )}
-        {searchedCity && hotels.length > 0 && (
-          <h2 className="text-[30px] text-white font-light mt-4">
-            {hotels.length} Properties in {searchedCity}
-          </h2>
-        )}
-      </div>
-
-      <div className="bg-[url('../Utilities/SortC.png')] relative bg-cover bg-center h-16">
-        <div className="flex items-center justify-center h-full space-x-28">
-          <span className="text-black font-semibold">SORT BY:</span>
-          {sortOptions.map((option, index) => (
-            <button
-              key={index}
-              onClick={() => handleSortClick(option)}
-              className={`text-black py-2 ${
-                activeSort === option ? 'border-b-4 border-blue-500' : ''
-              } focus:outline-none`}
+        {/* Search Panel */}
+        <div className="w-full h-[170px] bg-gradient-to-b from-[#061422] via-[#0e2b4a] to-[#164170] flex flex-col justify-center items-center text-center pt-4">
+          <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0">
+            <select
+              value={selectedCity}
+              onChange={handleCityChange}
+              className="block w-[212px] p-2 h-[51px] border border-gray-300 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md bg-[#213345] border-none text-[#0675DC] text-[12px]"
             >
-              {option}
+              <option value="">CITY, AREA OR PROPERTY</option>
+              {cities.map((city) => (
+                <option key={city._id} value={city.cityState.split(',')[0].trim()}>
+                  {city.cityState.split(',')[0].trim()}
+                </option>
+              ))}
+            </select>
+            <button
+              onClick={handleSearch}
+              className="bg-gradient-to-r from-cyan-500 to-blue-500 w-[185px] h-[43px] md:ml-2 rounded-full"
+            >
+              Search
             </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="hotel-list">
-        {searchedCity && hotels.length > 0 ? (
-          <>
-            <h2 className="text-[25px] font-light my-4 ml-64">
-              Showing properties in {searchedCity}
+          </div>
+          {!searchedCity && (
+            <h2 className="text-[18px] md:text-[30px] text-white font-light mt-4">
+              Search Properties in your preferred location
             </h2>
-            {hotels.map((hotel) => (
-              <HotelCard
-                key={hotel._id}
-                name={hotel.name}
-                location={hotel.location}
-                rating={hotel.rating}
-                images={hotel.images}
-                rooms={hotel.rooms}
-              />
+          )}
+          {searchedCity && hotels.length > 0 && (
+            <h2 className="text-[18px] md:text-[30px] text-white font-light mt-4">
+              {hotels.length} Properties in {searchedCity}
+            </h2>
+          )}
+        </div>
+
+        {/* Sort Panel */}
+        <div className="bg-[#dfeff9] text-black h-18">
+          <div className="flex items-center justify-center h-full space-x-8 md:space-x-28">
+            <span className="font-semibold">SORT BY:</span>
+            {sortOptions.map((option, index) => (
+              <button
+                key={index}
+                onClick={() => handleSortClick(option)}
+                className={`text-black py-2 ${
+                  activeSort === option ? 'border-b-4 border-blue-500' : ''
+                } focus:outline-none`}
+              >
+                {option}
+              </button>
             ))}
-          </>
-        ) : (
-          <h2 className="text-[25px] font-light my-4 flex justify-center items-center h-full">
-            No result to show...
-          </h2>
-        )}
-      </div>
+          </div>
+        </div>
+
+        <div className="hotel-list px-4 md:px-16">
+          {searchedCity && hotels.length > 0 ? (
+            <>
+              <h2 className="text-[18px] md:text-[25px] font-light my-4">
+                Showing properties in {searchedCity}
+              </h2>
+              {hotels.map((hotel) => (
+                <HotelCard
+                  key={hotel._id}
+                  name={hotel.name}
+                  location={hotel.location}
+                  rating={hotel.rating}
+                  images={hotel.images}
+                  rooms={hotel.rooms}
+                />
+              ))}
+            </>
+          ) : (
+            <h2 className="text-[18px] md:text-[25px] font-light my-4 flex justify-center items-center h-full">
+              No results to show...
+            </h2>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
 export default SearchPanel;
+
+
+
